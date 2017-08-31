@@ -1,6 +1,8 @@
 package com.andrew.controller;
 
 import com.andrew.model.Book;
+import com.andrew.service.impl.BookServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,6 +16,12 @@ import java.util.List;
 public class BookController {
 
     private List<Book> bookList;
+    private final BookServiceImpl bookService;
+
+    @Autowired
+    public BookController(BookServiceImpl bookService) {
+        this.bookService = bookService;
+    }
 
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
@@ -32,6 +40,7 @@ public class BookController {
         bookList.add(new Book(2,"sdadsada"));
         bookList.add(new Book(3,"Andrdasdsadsadew"));
         bookList.add(new Book(4,"vnhgjgew"));
+
         return bookList;
     }
 
