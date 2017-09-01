@@ -1,15 +1,14 @@
 package com.andrew.model;
 
 
-
 import javax.persistence.*;
 
 /**
- * Author andre.
+ * AuthorController andre.
  */
 
 @Entity
-@Table(name = "books")
+@Table(name = "Books")
 public class Book {
 
 
@@ -21,7 +20,6 @@ public class Book {
     private String title;
 
     public Book(){}
-
     public Book( String title) {
         this.title = title;
     }

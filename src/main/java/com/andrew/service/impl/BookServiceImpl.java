@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Author andre.
+ * AuthorController andre.
  */
 
 @Service
@@ -30,6 +30,6 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<Book> getAll() {
-        return null;
+        return bookRepository.getAll();
     }
 }

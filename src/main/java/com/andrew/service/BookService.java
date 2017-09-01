@@ -5,7 +5,7 @@ import com.andrew.model.Book;
 import java.util.List;
 
 /**
- * Author andre.
+ * AuthorController andre.
  */
 public interface BookService {
 

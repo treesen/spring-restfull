@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author andre.
+ * AuthorController andre.
  */
 
 @RestController
@@ -25,7 +25,9 @@ public class BookController {
 
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public List<Book> getBooks(){return init();}
+    public List<Book> getBooks(){
+        return bookService.getAll();
+    }
 
 
 

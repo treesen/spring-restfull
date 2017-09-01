@@ -8,9 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Author andre.
+ * AuthorController andre.
  */
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
+
+    @Query("SELECT b FROM Book b")
+    List<Book> getAll();
 
 }

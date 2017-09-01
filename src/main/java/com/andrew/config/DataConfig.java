@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Author andre.
+ * AuthorController andre.
  */
 @Configuration
 @EnableTransactionManagement
