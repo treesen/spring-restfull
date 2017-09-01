@@ -1,15 +1,13 @@
 package com.andrew.controller;
 
 import com.andrew.model.Author;
-
 import com.andrew.service.impl.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -20,34 +18,36 @@ import java.util.List;
 @RestController
 public class AuthorController {
 
-    private List<Author> authorList;
+
     private final AuthorServiceImpl authorService;
+    private List<Author> authorList;
 
     @Autowired
     public AuthorController(AuthorServiceImpl authorService) {
-
         this.authorService = authorService;
-
     }
 
 
-    @RequestMapping(value = "/authors", method = RequestMethod.GET)
+    @GetMapping(value = "/authors")
     public List<Author> getAuthors(){
         return authorService.getAll();
     }
 
 
 
-    @RequestMapping(value = "/authors/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/authors/{id}")
     public Author getAutorsById(@PathVariable int id){
-        return getAuthors().get(id);
+        authorList = getAuthors();
+        if(id< authorList.size())
+            return authorList.get(id);
+        return null;
     }
 
-    private List<Author> init(){
-        authorList = new ArrayList<>();
-        authorService.add(new Author(1,"Andrew" ,"Maslov"));
-        authorService.add(new Author(2,"SEREP","ASDS"));
-        return authorList;
+    @PostMapping(value = "/authors")
+    public ResponseEntity createAuthor(@RequestBody Author author) {
+        authorService.add(author);
+        return new ResponseEntity(author, HttpStatus.OK);
     }
+
 
 }

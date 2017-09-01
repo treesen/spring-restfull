@@ -44,9 +44,22 @@
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <key id="19" parent="12" name="PRIMARY">
+    <column id="19" parent="12" name="author_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="20" parent="12" name="books_author_id_fk">
+      <ColNames>author_id</ColNames>
+    </index>
+    <key id="21" parent="12" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="22" parent="12" name="books_author_id_fk">
+      <ColNames>author_id</ColNames>
+      <RefSchemaName>bookstore</RefSchemaName>
+      <RefTableName>author</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

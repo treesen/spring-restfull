@@ -1,11 +1,13 @@
 package com.andrew.controller;
 
+import com.andrew.model.Author;
 import com.andrew.model.Book;
 import com.andrew.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +17,8 @@ import java.util.List;
 @RestController
 public class BookController {
 
-    private List<Book> bookList;
     private final BookServiceImpl bookService;
+    private List<Book> bookList;
 
     @Autowired
     public BookController(BookServiceImpl bookService) {
@@ -24,26 +26,25 @@ public class BookController {
     }
 
 
-    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    @GetMapping(value = "/books")
     public List<Book> getBooks(){
         return bookService.getAll();
     }
 
 
 
-    @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
-    public Book getBookById(@PathVariable int id){
-        return getBooks().get(id);
+    @GetMapping(value = "/books/{id}")
+    public Book getBookById(@PathVariable int id) throws IndexOutOfBoundsException{
+        bookList = getBooks();
+        if(id< bookList.size())
+            return bookList.get(id);
+        return null;
     }
 
-    private List<Book> init(){
-        bookList = new ArrayList<>();
-        bookList.add(new Book(1,"Andrew"));
-        bookList.add(new Book(2,"sdadsada"));
-        bookList.add(new Book(3,"Andrdasdsadsadew"));
-        bookList.add(new Book(4,"vnhgjgew"));
-
-        return bookList;
+    @PostMapping(value = "/books")
+        public ResponseEntity createBook(@RequestBody Book book) {
+        bookService.add(book);
+        return new ResponseEntity(book, HttpStatus.OK);
     }
 
 }
